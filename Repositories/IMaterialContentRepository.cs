@@ -4,15 +4,11 @@ using System.Threading.Tasks;
 
 public interface IMaterialContentRepository
 {
-    
-    Task<IReadOnlyList<MaterialContent>> GetAllByMaterialAsync(Guid materialId);
-
-    Task<IReadOnlyList<MaterialContent>> GetAllAsync();
+    Task<MaterialContent?> GetByMaterialIdAsync(Guid materialId);
 
     Task AddAsync(MaterialContent materialContent);
 
     Task UpdateAsync(MaterialContent materialContent);
 
     Task DeleteAsync(Guid id);
-
 }
