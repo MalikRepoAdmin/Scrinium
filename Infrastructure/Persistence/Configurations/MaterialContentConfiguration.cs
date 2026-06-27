@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 public sealed class MaterialContentConfiguration : IEntityTypeConfiguration<MaterialContent>
@@ -13,10 +18,23 @@ public sealed class MaterialContentConfiguration : IEntityTypeConfiguration<Mate
         // Rule 3: Other Property Constraints
         builder.Property(mc => mc.RawText).IsRequired();
         builder.Property(mc => mc.Summary).HasSentinel("");
-        // TODO: Create Converter to Serialize and Deserialize ICollection into and from JSON
+
+        var comparer = new ValueComparer<List<string>>(
+            (left, right) => left!.SequenceEqual(right!),
+            list => list.Aggregate(0, (hash, value) => HashCode.Combine(hash, value.GetHashCode())),
+            list => list.ToList()
+        );
+
         builder
             .Property(mc => mc.Keywords)
-            .IsRequired() /* .HasConversion() */
+            .IsRequired()
+            .HasConversion(
+                keywords => JsonSerializer.Serialize(keywords, (JsonSerializerOptions?)null),
+                json =>
+                    JsonSerializer.Deserialize<List<string>>(json, (JsonSerializerOptions?)null)
+                    ?? new List<string>()
+            )
+            .Metadata.SetValueComparer(comparer);
         ;
     }
 }

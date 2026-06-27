@@ -8,7 +8,8 @@ public sealed class MaterialContent
     public string RawText { get; set; } = "";
     public string? Summary { get; set; }
 
-    // TODO: List properties would need Converter into JSON, because we cannot store list directly into Database
+    // List properties need JSON serializer and deserializer
+    // because we cannot store list directly into Database
     public List<string> Keywords { get; set; } = [];
 
     // Foreign Key & Navigation Property: Belongs To Material
