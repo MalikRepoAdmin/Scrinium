@@ -5,8 +5,9 @@ public sealed class MaterialTagConfiguration : IEntityTypeConfiguration<Material
 {
     public void Configure(EntityTypeBuilder<MaterialTag> builder)
     {
-        // Rule 1: Primary Key
+        // Rule 1: Primary Key & Indexes
         builder.HasKey(mt => new { mt.MaterialId, mt.TagId });
+        builder.HasIndex(mt => new { mt.TagId, mt.MaterialId });
 
         // Rule 2: Relationships and Cascade Rules
 

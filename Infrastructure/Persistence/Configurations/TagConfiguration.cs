@@ -16,6 +16,6 @@ public sealed class TagConfiguration : IEntityTypeConfiguration<Tag>
             .OnDelete(DeleteBehavior.Cascade);
 
         // Rule 3: Other Property Constraints
-        builder.Property(t => t.Name).IsRequired().HasMaxLength(20);
+        builder.Property(t => t.Name).IsRequired().HasMaxLength(20).UseCollation("NOCASE");
     }
 }

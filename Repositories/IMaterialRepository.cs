@@ -16,5 +16,5 @@ public interface IMaterialRepository
 
     Task UpdateAsync(Material material);
 
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(Material material);
 }
