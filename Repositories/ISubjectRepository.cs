@@ -12,5 +12,5 @@ public interface ISubjectRepository
 
     Task UpdateAsync(Subject subject);
 
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(Subject subject);
 }

@@ -12,5 +12,5 @@ public interface ICollectionRepository
 
     Task UpdateAsync(Collection collection);
 
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(Collection collection);
 }

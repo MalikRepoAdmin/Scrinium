@@ -14,5 +14,5 @@ public interface ITagRepository
 
     Task UpdateAsync(Tag tag);
 
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(Tag tag);
 }

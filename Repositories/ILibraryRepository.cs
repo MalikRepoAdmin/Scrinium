@@ -12,5 +12,5 @@ public interface ILibraryRepository
 
     Task UpdateAsync(Library library);
 
-    Task DeleteAsync(Guid id);
+    Task DeleteAsync(Library library);
 }
